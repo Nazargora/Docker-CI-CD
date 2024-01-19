@@ -17,8 +17,6 @@ jobs:
     - name: Build and run the Docker image
       run: |
         docker-compose up -d --build
-        docker-compose exec api_service sh
-        java -jar /home/app/target/spring_rest_docker.jar
 
         
 
