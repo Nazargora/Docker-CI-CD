@@ -25,5 +25,9 @@ jobs:
     - name: Show Docker container
       run: docker ps
 
+    - name: Check if it works
+      run: curl http://localhost:8080/all
+
+
     - name: Clean up (optional)
       run: docker-compose down
