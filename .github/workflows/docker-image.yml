@@ -22,7 +22,7 @@ jobs:
 
     - name: Show Docker container logs
       run: |
-        docker-compose logs api_service
+        docker logs docker-ci-cd_api_service_1
         docker-compose logs mysqldb
 
 
