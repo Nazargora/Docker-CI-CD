@@ -14,5 +14,16 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker-compose up -d --tag my-container-names:$(date +%s)
+    - name: Build and run the Docker image
+      run: |
+        docker-compose up -d --build
+        
+
+    - name: Show Docker container logs
+      run: docker-compose logs
+
+    - name: Show Docker container
+      run: docker ps
+
+    - name: Clean up (optional)
+      run: docker-compose down
