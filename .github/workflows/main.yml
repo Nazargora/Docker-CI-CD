@@ -34,5 +34,5 @@ jobs:
         run: |
            docker tag docker-ci-cd_api_service ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service:${{ github.sha }}
            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service:${{ github.sha }}
-           docker tag docker-ci-cd_mysqldb_1 ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_mysqldb_1:{{ github.sha }}
-           docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_mysqldb_1:${{ github.sha }}
+           docker tag mysql ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/mysql:{{ github.sha }}
+           docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/mysql:${{ github.sha }}
