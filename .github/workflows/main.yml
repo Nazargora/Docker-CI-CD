@@ -24,6 +24,11 @@ jobs:
       - name: Build Docker images
         run: docker-compose up -d
 
+      - name: Show Docker container and images
+        run: |
+            docker ps
+            docker images
+
 
       - name: Push Di to ACR
         run: |
