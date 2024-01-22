@@ -24,4 +24,4 @@ jobs:
 
       - name: Deploy to Azure VM
         run: |
-          az vm run-command invoke --resource-group gora04 --name nazar --command-id RunShellScript --script "docker stop your_container_name; docker rm your_container_name; docker run -d -p 80:8080 --name docker-ci-cd_api_service ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service:${{ github.sha }}"
+        
