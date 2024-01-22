@@ -1,0 +1,27 @@
+name: Deploy to Azure VM
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy-to-azure-vm:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Login to ACR
+        uses: azure/docker-login@v1
+        with:
+          login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+
+      - name: Pull Docker image
+        run: |
+          docker pull ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service:${{ github.sha }}
+
+      - name: Deploy to Azure VM
+        run: |
+          az vm run-command invoke --resource-group gora04 --name nazar --command-id RunShellScript --script "docker stop your_container_name; docker rm your_container_name; docker run -d -p 80:8080 --name docker-ci-cd_api_service ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service:${{ github.sha }}"
