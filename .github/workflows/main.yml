@@ -23,6 +23,13 @@ jobs:
           docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service:lastest .
           docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service:lastest
 
+      - name: Debug Docker Login
+        run: |
+            echo "REGISTRY_LOGIN_SERVER: ${{ secrets.REGISTRY_LOGIN_SERVER }}"
+            echo "REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}"
+            docker login ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io -u ${{ secrets.REGISTRY_USERNAME }} -p ${{ secrets.REGISTRY_PASSWORD }}
+
+
 
       - name: SSH into Azure VM and pull Docker image
         run: |
