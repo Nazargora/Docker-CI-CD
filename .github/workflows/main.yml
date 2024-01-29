@@ -24,9 +24,6 @@ jobs:
           docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service:latest .
           docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service:latest
 
-      - name: Debug Authorized Keys
-        run: |
-            ssh -p 222 ${{ secrets.AZURE_VM_USERNAME }}@${{ secrets.AZURE_VM_IP }} "cat ~/.ssh/authorized_keys"
 
 
       - name: SSH into Azure VM and deploy
@@ -34,7 +31,7 @@ jobs:
         with:
            host: ${{ secrets.AZURE_VM_IP }}
            username: ${{ secrets.AZURE_VM_USERNAME }}
-           key:  ${{ secrets.SSH_PRIVATE_KEY}}        
+           password: ${{ secrets.PASSWORD }}        
            port: 222  
            script: |
               docker login ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io -u ${{ secrets.REGISTRY_USERNAME }} -p ${{ secrets.REGISTRY_PASSWORD }}
