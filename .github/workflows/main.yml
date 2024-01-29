@@ -35,8 +35,8 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY}}
           port: 222  
           script: |
-              docker login ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io -u ${{ secrets.REGISTRY_USERNAME }} -p ${{ secrets.REGISTRY_PASSWORD }}
-              docker pull ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service:latest
+                 docker login ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io -u ${{ secrets.REGISTRY_USERNAME }} -p ${{ secrets.REGISTRY_PASSWORD }}
+                 docker pull ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service:latest
   
       
         
