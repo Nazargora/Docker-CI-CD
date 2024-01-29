@@ -29,14 +29,7 @@ jobs:
             echo "REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}"
             docker login ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io -u ${{ secrets.REGISTRY_USERNAME }} -p ${{ secrets.REGISTRY_PASSWORD }}
 
-      - name: Debug Environment and Docker Version in Azure VM
-        run: |
-          echo "REGISTRY_LOGIN_SERVER: ${{ secrets.REGISTRY_LOGIN_SERVER }}"
-          echo "REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}"
-          echo "AZURE_VM_USER: ${{ secrets.AZURE_VM_USER }}"
-          echo "AZURE_VM_IP: ${{ secrets.AZURE_VM_IP }}"
-          ssh -o StrictHostKeyChecking=no -i private_key.pem -p 222 ${{ secrets.AZURE_VM_USER }}@${{ secrets.AZURE_VM_IP }} "env"
-          ssh -o StrictHostKeyChecking=no -i private_key.pem -p 222 ${{ secrets.AZURE_VM_USER }}@${{ secrets.AZURE_VM_IP }} "docker --version"
+      
 
       - name: SSH into Azure VM and pull Docker image
         run: |
