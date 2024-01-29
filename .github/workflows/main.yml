@@ -32,11 +32,8 @@ jobs:
       
 
       - name: SSH into Azure VM and pull Docker image
-        run: |
-            echo "${{ secrets.SSH_PRIVATE_KEY }}" > /home/nazar/.ssh/id_rsa
-            chmod 600 /home/nazar/.ssh/id_rsa
-            cat /home/nazar/.ssh/id_rsa
-            ssh -o StrictHostKeyChecking=no -i private_key.pem -p 222 ${{ secrets.AZURE_VM_USER }}@${{ secrets.AZURE_VM_IP }} "sudo docker pull ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service:latest"
+        run:  
+            ssh -o StrictHostKeyChecking=no -i ${{secrets.SSH_PRIVATE_KEY}} -p 222 ${{ secrets.AZURE_VM_USER }}@${{ secrets.AZURE_VM_IP }} "sudo docker pull ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service:latest"
         env:
          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
          AZURE_VM_USER: ${{ secrets.AZURE_VM_USER }}
