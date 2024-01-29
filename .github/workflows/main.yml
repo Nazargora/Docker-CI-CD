@@ -26,17 +26,18 @@ jobs:
 
 
 
-      - name: SSH into Azure VM and deploy
-        uses: appleboy/ssh-action@master
+     
+      - name: executing remote ssh commands using ssh key
+        uses: appleboy/ssh-action@v1.0.3
         with:
-           host: ${{ secrets.AZURE_VM_IP }}
-           username: ${{ secrets.AZURE_VM_USERNAME }}
-           key: ${{ secrets.SSH_PRIVATE_KEY}}       
-           port: 222  
-           script: |
+          host: ${{ secrets.AZURE_VM_IP }}
+          username: ${{ secrets.AZURE_VM_USER}}
+          key: ${{ secrets.SSH_PRIVATE_KEY}}
+          port: 222  
+          script: |
               docker login ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io -u ${{ secrets.REGISTRY_USERNAME }} -p ${{ secrets.REGISTRY_PASSWORD }}
               docker pull ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service:latest
-      # Add any additional steps for running the Docker container on your VM
+  
       
         
 
