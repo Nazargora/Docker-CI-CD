@@ -22,22 +22,12 @@ jobs:
         run: |
           docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service:latest .
           docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service:latest
-
-      - name: Debug Docker Login
-        run: |
-            echo "REGISTRY_LOGIN_SERVER: ${{ secrets.REGISTRY_LOGIN_SERVER }}"
-            echo "REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}"
-            docker login ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io -u ${{ secrets.REGISTRY_USERNAME }} -p ${{ secrets.REGISTRY_PASSWORD }}
-
       
-
       - name: SSH into Azure VM and pull Docker image
-        run:  
-            ssh -o StrictHostKeyChecking=no -i ${{secrets.SSH_PRIVATE_KEY}} -p 222 ${{ secrets.AZURE_VM_USER }}@${{ secrets.AZURE_VM_IP }} "sudo docker pull ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service:latest"
-        env:
-         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-         AZURE_VM_USER: ${{ secrets.AZURE_VM_USER }}
-         AZURE_VM_IP: ${{ secrets.AZURE_VM_IP }}
-         REGISTRY_LOGIN_SERVER: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-
+        run: |
+            echo "${{ secrets.SSH_PRIVATE_KEY }}" > /home/runner/work/_temp/private_key.pem
+            chmod 600 /home/runner/work/_temp/private_key.pem
+            ssh -o StrictHostKeyChecking=no -i /home/runner/work/_temp/private_key.pem -p 222 ${{ secrets.AZURE_VM_USER }}@${{ secrets.AZURE_VM_IP }} "sudo docker pull ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service:latest"
+     
+  
 
