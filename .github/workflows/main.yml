@@ -22,7 +22,7 @@ jobs:
         run: |
           docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service:latest .
           docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service:latest
-      - name: Debug SSH Key
+      
 
       - name: Debug SSH Key
         run: |
