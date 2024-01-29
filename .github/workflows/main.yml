@@ -30,6 +30,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@main
 
+
+      - name: Wait for Docker Image Availability
+        run: sleep 60s
+
     
 
       - name: Copy Docker image to Azure VM
