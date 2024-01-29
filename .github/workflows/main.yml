@@ -18,11 +18,14 @@ jobs:
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
 
-      
+      - name: Build and push Docker images
+        run: |
+          docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service:latest .
+          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service:latest
+
       
       - name: Pull Docker image
         run: |
-          ssh -v  -o StrictHostKeyChecking=no -p 222 ${{ secrets.AZURE_VM_USER }}@${{ secrets.AZURE_VM_IP }} "sudo docker pull ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service:latest"
-        
+          ssh -v  -o StrictHostKeyChecking=no -p 222 ${{ secrets.AZURE_VM_USER }}@${{ secrets.AZURE_VM_IP }} "sudo docker pull ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service:latest"       
         
 
