@@ -29,7 +29,58 @@ jobs:
         with:
            host: ${{ secrets.AZURE_VM_IP }}
            username: ${{ secrets.AZURE_VM_USERNAME }}
-           key: ${{ secrets.SSH_PRIVATE_KEY }}
+           key: |
+               -----BEGIN RSA PRIVATE KEY-----
+               MIIJKgIBAAKCAgEA0jWO8DJK0A0Ysob6BvgdwoNH9oOXzif7uQ1TKOC6hJ6ZBNrL
+               h8kHECbBux5Wnx0PCtBfqWqJQGuulsShiDsMmpwzmUWNi0HY2HV593z2fbJG2Y8g
+               8aaT6UTqQ06StpP+NVP6uClKeVLnC0XRT7o1jy4UVZg1sC1SS7hHxfYmt41xUzIh
+               +iBY1DiJ24OUPoNhoQ4Gnivmmv6HVdITeNvjYO5WkOP1xdIrJFUUZoVSqQLOnJuq
+               DZeeRfajhoHBcXcalvGivD4LMm62QSz1onTIEUomEIVJQAI3eH3xrQgAQ8InghkG
+               w8tsqAxzBDeRnR6bWElG8tsKLMMlql40k0ANHs0DETZB7P53oMOAEmsNmcbiVrIP
+               EoaNdUucG0vlrHsf6ip4S/2R76ph1INYmgYEkbbVJJ4aGWY1jD9J/W4Hc1P/aok+
+               xbkNjmcVdR12FzlwmQLr2ztmJN0ZQY1pFSQMpYD29W1GAGRHDhtQxsLJM40TEzN9
+               /ePTT+6ysDZf9UEEKLGHEUqb+Mt2W1roMDNYjCMmCvswyYKOGFRs7J6o4sFU/Xpa
+               QYneOIbM3oj8++Q681G9St+KOIassuPfysjAw84lSKffyTWH+AuwDtu8irs2ZT85
+               kdX7wWkeCC05nkThP+bqqg/DqrKzUKpS5Lm3A6L81tLPPc59SHW4pUQXo+MCAwEA
+               AQKCAgEAgiqUFnyuAuL5NiOK06H0m6w7dZTK/eeYYmCz7A4ssU6cJnttqOl8rC2z
+               rTD+Jo0R8XpSok/MKc4EUGv2MquOBHdRJEoDegYORwuHuQ7ye6dXZATTO5AQ61O3
+               VHJlOxWtRkx4Zm17JmGFnF9hW2NNIxo/kTktlaia2zSDjTv9gY/easwSahZ5qwBP
+               rVRvCb7FR7utsWgx5ixSlXv+fsp6pF0x0Yq3eAXKnTbp6QoJw4pvcl6aEMygP2aY
+               oAPdS2ubVXjPco1g1Zvk07sJZ820zbACnhxK3Y4B12T1sFXSBCNH37GrlLZ01CLR
+               Xf0i+A4p16OYgW3NgSZePn8TQ1NYS2jDd5Ttsx6giV7nTA/yNPEf+/B8meEMinLr
+               dAcj2r4guXpvRJ3KnIJKPlcLmP0WhjQS7pcrEVoVrPTMwgEK6PrXGmXKKxhqS4x8
+               diSkhX3xaT7pZF1yLaQsQtqa4gTQyFpPiZckkyVQxxAyzKmgRO3Ga27R+TPQr0E8
+               Z26CDLh0VB0Yxim3DO8/7PMIUaCabF7/GUfqnz3Z7g+dGc2yxYotaoHOdk6pRPPq
+               IG2Dd1iKqx6y4PriFQ9f8J1MtGzFkpPtcW00la2oQvy1Q5lh1v+v6BZ4r2YnPl4D
+               nze7nVNsXmV7KquTtmG32Wgc/I3wjjW1GqQUYhyj8Lrq9/K7VGECggEBAPLO8xpl
+               sE3CplbnhOW6eE+ZdWiQH//0320BXbUN9xI4SQyg54+x1xtvwtsfpFUr9qpWKdAj
+               X6wvAFRZZUJESJ7ghJ8D39itjbdC6dk6F9LKEBb+SR0XItyYHD8J3UcnMgfArDhl
+               5SN+mkOAi97EbBkvMj/IzKp7+jDef+jy3iIzmQP2KWLUBY3vH95GkqkipCz0a8DJ
+               gtf9krmH4g826OInR3iFvOQR8fv6+P+lD8O0moqBat8cuJhNi6cq3ufLF4wTER3c
+               RitsnFlIZCMrN3bOWronypNnyOcZ7Ib42AzUcqXilUE+pBtZhS76goMGK3Ovj9Da
+               4U/ab+pm/YMrcesCggEBAN2hNa+6uj82Mhqipwk3F2b6eY1EmBSt/G6SN/CL0lBr
+               b4oPdziTaU967ZQf+p6X3NO9ejEoA71wKizcy059WOxN790a/ERWvhEu8VoLQnEX
+               WyjmMdmIdMi3GYeQWvN5gpf79fi+lTEJxysbog11MCGFhoJ0Lf7aIqU92Noqatb+
+               zzsHSl+hJolvloIi/iNZNp2+Tlm0lQyWOZ6CHpcWT1Ram8hRfuzhsCWd4H4Af2lF
+               Yw1Rc30/fOtTJ7VwCZTE4Grl1h+hxE2BFJWmiFmIGanf6UXrWXqt4bB+u2Cklryc
+               3rQYntahLFsUoxjLu0ErBWNF9ShKFrgnctM8CbJkn+kCggEBAOUsodYbftGWVGwY
+               L56pZt8yp9eemSV8WdnH/Utjt/zRdVlfEdDV+YMi9JbgAbqGOVZC50pV6PpajoQO
+               sH1gd+7FWUfBX2ljPixoEtJ+e3fwUklxj07OxI/TXm29gMak3xrkJ2k/+4uJ9k6a
+               KOqFGMaYfmQnwc10IQw5Jh+YBEPh0Z4knKF0Hx39QmYI1GqhkLYBqSaYzE/TPcax
+               05OqrxquGk5OZKAbs/uywYyBniSI9YifaGDX+f9+yb5pv2Smkz4ZzQETJIPeCqBW
+               rHVpV/th/85Oumxw+/XsyQwIGdvaNbAO8fNYDYrm7scNmVvT2fViEmr9/MXjFdj3
+               hnZk7isCggEBAK0gEwn0uSxLr5Py3rxqFpPQsUbTAGGXD4toGN6EuoMriXO1ZRIC
+               xM7bXd7JpEJiqpOUfXEMqu8+QRPOXdowPFhLAUYcoFbZ05skqlAGX55r+j/WobYl
+               y+RGc2DcOM/caVFD9v6aEXy/AKAB8/LDShfFcC9TheKAj3O4/j5dyBut7D9WEJjn
+               D21oh4+cuhzuwaUzVYzpbUzpxJS3XCH1wX5JUUuHrbhpC+o2i3ih9uVK2Hc82xRJ
+               ldFVob0viax2pj+azkrjWK6aWHQWJIibskBqspR1pe4ZCiWOudxidYVcnPLeEKXk
+               PPvhAQ6Lhvj/HDRSH5GbXmf4GNA9I+4AgJECggEAVO8t4mEL7dQwmjxodJpqRBNR
+               D+ccM/K8Eh1CfCAjycqXTcLDZuueDyZX6C2NqzdZRvQj8FmG/qo0Tu2s4+je4OpH
+               iKpiyEloQoBnFwyXCe7vs3zwdtUnHXlMo54uLCtfN511SsheoA+gJFTxjMTX/T0C
+               yYdfOTWfc3lvVwObcpgZFr9SZY302rxhOzhlbOm20fTGsF+G/cry1VvWD5SopxwK
+               rxfOKmFgnV2kK0wVQ7ob/yGTFcDjDyBcPP8D37EruyF0c8ld5d5EvzZ0PljhTr9S
+               XuucX1hyGgrzswl6SBM3ZNaRaB1E4Nr97VAzYEXXeXizSZvJmiVV7/CoMzDe/g==
+               -----END RSA PRIVATE KEY-----        
            port: 222  
            script: |
               docker login ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io -u ${{ secrets.REGISTRY_USERNAME }} -p ${{ secrets.REGISTRY_PASSWORD }}
