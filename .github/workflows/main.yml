@@ -26,24 +26,6 @@ jobs:
              docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service:${{ github.sha }} . 
              docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service:${{ github.sha }}
 
-  deploy-to-azure-vm:
-    runs-on: ubuntu-latest
-    needs: push-to-azure-container-registry
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@main
-        
-      - name: Login to ACR
-        uses: azure/docker-login@v1
-        with:
-          login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io
-          username: ${{ secrets.REGISTRY_USERNAME }}
-          password: ${{ secrets.REGISTRY_PASSWORD }}
-
-      - name: Debug Source Path
-        run: |
-            ls -l "${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service:${{ github.sha }}"
-
 
       - name: Copy Docker image to Azure VM
         uses: appleboy/scp-action@master
@@ -52,9 +34,8 @@ jobs:
           username: ${{ secrets.AZURE_VM_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 222
-          source: "${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service"
-          target: /home/nazar/docker-ci-cd_api_service:${{ github.sha }}
-          debug: true
+          source: "${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service:${{ github.sha }}"
+          target: /home/nazar/docker-ci-cd_api_service
 
           
       - name: SSH into Azure VM and pull Docker image
