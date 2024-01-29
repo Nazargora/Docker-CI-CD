@@ -24,7 +24,7 @@ jobs:
       - name: Build and push Docker images
         run: |
              docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service:${{ github.sha }} . 
-             docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service:${{ github.sha }}
+             docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service
 
   deploy-to-azure-vm:
     runs-on: ubuntu-latest
@@ -42,7 +42,7 @@ jobs:
 
       - name: Debug Source Path
         run: |
-            ls -l "${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service:${{ github.sha }}"
+            ls -l "${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service"
 
 
       - name: Copy Docker image to Azure VM
@@ -52,7 +52,7 @@ jobs:
           username: ${{ secrets.AZURE_VM_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 222
-          source: "${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service:${{ github.sha }}"
+          source: "${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service"
           target: /home/nazar/docker-ci-cd_api_service:${{ github.sha }}
           debug: true
 
@@ -64,8 +64,8 @@ jobs:
           username: ${{ secrets.AZURE_VM_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            docker pull /home/nazar/docker-ci-cd_api_service:${{ github.sha }}
-            docker tag /home/nazar/docker-ci-cd_api_service:${{ github.sha }} docker-ci-cd_api_service:${{ github.sha }}
+            docker pull /home/nazar/docker-ci-cd_api_service
+            docker tag /home/nazar/docker-ci-cd_api_service:${{ github.sha }} docker-ci-cd_api_service
             docker ps
             docker images
 
