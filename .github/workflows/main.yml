@@ -23,7 +23,10 @@ jobs:
           docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service:latest .
           docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service:latest
       
+      - name: Debug SSH Key
+        run: cat ~/.ssh/github_actions_key
 
+      
       - name: Pull Docker image
         run: |
           ssh -v  -o StrictHostKeyChecking=no -p 222 ${{ secrets.AZURE_VM_USER }}@${{ secrets.AZURE_VM_IP }} "sudo docker pull ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service:latest"
