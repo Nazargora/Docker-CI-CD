@@ -20,8 +20,8 @@ jobs:
 
       - name: Build and push Docker images
         run: |
-          docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service:${{ github.sha }} .
-          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service:${{ github.sha }}
+          docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service:lastest .
+          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service:lastest
 
 
       - name: SSH into Azure VM and pull Docker image
@@ -29,7 +29,7 @@ jobs:
             echo "${{ secrets.SSH_PRIVATE_KEY }}" > private_key.pem
             chmod 600 private_key.pem
             cat private_key.pem
-            ssh -o StrictHostKeyChecking=no -i private_key.pem -p 222 ${{ secrets.AZURE_VM_USER }}@${{ secrets.AZURE_VM_IP }} "sudo docker pull ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service:${{ github.sha }}"
+            ssh -o StrictHostKeyChecking=no -i private_key.pem -p 222 ${{ secrets.AZURE_VM_USER }}@${{ secrets.AZURE_VM_IP }} "sudo docker pull ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service:lastest"
         env:
          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
          AZURE_VM_USER: ${{ secrets.AZURE_VM_USER }}
