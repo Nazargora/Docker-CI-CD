@@ -5,7 +5,7 @@ on:
       - main
 
 jobs:
-  push-to-azure-container-registry:
+  push-to-ACR-and-pull-into-VM:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -24,17 +24,14 @@ jobs:
           docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service:${{ github.sha }} .
           docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service:${{ github.sha }}
 
-
-
-     
       - name: Pull images from ACR to VM
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.AZURE_VM_IP }}
-          username: ${{ secrets.AZURE_VM_USER}}
-          key: ${{ secrets.SSH_PRIVATE_KEY}}
-          port: 222  
-          script: |
+           host: ${{ secrets.AZURE_VM_IP }}
+           username: ${{ secrets.AZURE_VM_USER}}
+           key: ${{ secrets.SSH_PRIVATE_KEY}}
+           port: 222  
+           script: |
                   sudo docker login ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io -u ${{ secrets.REGISTRY_USERNAME }} -p ${{ secrets.REGISTRY_PASSWORD }}
                   sudo docker pull ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service:${{ github.sha }}
   
