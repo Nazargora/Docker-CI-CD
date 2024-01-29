@@ -17,6 +17,7 @@ jobs:
           login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
+          port: 222
 
       - name: Build and push Docker images
         run: |
