@@ -23,7 +23,7 @@ jobs:
 
       - name: Build and push Docker images
         run: |
-             docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service:${{ github.sha }} 
+             docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service:${{ github.sha }} . 
              docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service:${{ github.sha }}
 
   deploy-to-azure-vm:
