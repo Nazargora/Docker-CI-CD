@@ -23,10 +23,17 @@ jobs:
           docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service:latest .
           docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service:latest
       
-
-      - name: SSH into Azure VM and pull Docker image
+      - name: Set up SSH key
         run: |
-            ssh -v -o StrictHostKeyChecking=no -p 222 ${{ secrets.AZURE_VM_USER }}@${{ secrets.AZURE_VM_IP }} "sudo docker pull ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service:latest"
+             mkdir -p ~/.ssh/
+             echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/github_actions_key
+             chmod 600 ~/.ssh/github_actions_key
+             eval "$(ssh-agent -s)"
+             ssh-add ~/.ssh/github_actions_key
+
+      - name: Pull Docker image
+        run: |
+          ssh -o StrictHostKeyChecking=no -p 222 ${{ secrets.AZURE_VM_USER }}@${{ secrets.AZURE_VM_IP }} "sudo docker pull ${{ secrets.REGISTRY_LOGIN_SERVER }}.azurecr.io/docker-ci-cd_api_service:latest"
         
         
 
