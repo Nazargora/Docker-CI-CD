@@ -1,6 +1,13 @@
 name: 'Action B'
 
 on:
+  workflow_call:
+    inputs:
+      name:
+        description: 'Enter your name'
+        required: true
+        type: string
+        
   workflow_dispatch:
     inputs:
       name:
