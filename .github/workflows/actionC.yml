@@ -27,7 +27,7 @@ jobs:
         name: ${{inputs.name}}
 
   say_goodbye:
-    needs: say_hello
+    needs: hi
     runs-on: ubuntu-latest
     steps:
       - name: Say Goodbye
