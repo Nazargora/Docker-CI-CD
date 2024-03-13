@@ -22,7 +22,7 @@ jobs:
 
       - name: Run Action B
         id: action-b
-        uses: ./Action B.yml
+        uses: ./ActionB.yml
         with:
           name: ${{inputs.name}}
 
