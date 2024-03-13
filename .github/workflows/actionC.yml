@@ -22,12 +22,9 @@ jobs:
 
   say_hello:
     needs: hi
-    runs-on: ubuntu-latest
-    steps:
-      - name: Run Action B
-        uses: ./.github/workflows/ActionB.yml
-        with:
-          name: ${{inputs.name}}
+    uses: ./.github/workflows/ActionB.yml
+    with:
+        name: ${{inputs.name}}
 
   say_goodbye:
     needs: say_hello
