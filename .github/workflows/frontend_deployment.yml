@@ -1,0 +1,68 @@
+ name: 05 Frontend - Deployment
+ on:
+   workflow_dispatch:
+     inputs:
+       environment:
+         description: 'The environment we want to deploy to.'
+         required: true
+         type: string
+       frontend_profile:
+         description: 'The profile to be set, one of dev, prod, stg, local. Default is set to prod'
+         required: false
+         type: string
+       release:
+          description: 'The release-number. Based on this number version.html files, jira releases and github repo tags will be created.'
+          required: true
+          type: string
+       frontend_branch:
+          description: "Branch of the Frontend Repo to be deployed. Default: dev"
+          default: "dev"
+          required: false
+          type: string
+
+ env:
+  slack-channel: "C037A2HUMLK"
+  slack-message-mention: "<!channel>"
+  # dev C037A2HUMLK dd: U030TTBK97F      
+       
+ jobs:
+     frontend-deployment:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v4
+        
+        - name: Generate a token
+          id: generate_token
+          uses: actions/create-github-app-token@v1
+          with:
+            app-id: ${{ secrets.CICD_APP_ID }}
+            private-key: ${{ secrets.CICD_APP_KEY }}
+            owner: ${{ github.repository_owner }}
+
+        - name: Frontend Deployment
+          uses: ./bc-actions/frontend
+          with:
+            environment: ${{ inputs.environment }}
+            profile: ${{ inputs.frontend_profile }}
+            release: ${{ inputs.release }}
+            token: ${{ steps.generate_token.outputs.token  }}
+            acruser: ${{ secrets.REGISTRY_USERNAME }}
+            acrpwd: ${{ secrets.REGISTRY_PASSWORD }}
+            branch: ${{inputs.frontend_branch}}
+
+        - name: Wait for Frontend
+          uses: ./bc-actions/common/wait-for-url
+          with:
+            interval: "10"
+            timeout: "360"
+            url: "https://${{inputs.environment}}.betterco.ai/assets/version.txt"
+            expected: ${{ github.run_id }}-${{ github.run_attempt }}
+
+        - name: Slack frontend done
+          id: slack-frontend-done
+          uses: slackapi/slack-github-action@v1.24.0
+          with:
+            channel-id: ${{env.slack-channel}}
+            slack-message: "${{env.slack-message-mention}} me again, shiny new *frontend* on *${{inputs.environment}}*. https://${{inputs.environment}}.betterco.ai" 
+          env:
+            SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_DEVOPS }}
