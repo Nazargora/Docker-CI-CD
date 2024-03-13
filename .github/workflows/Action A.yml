@@ -22,7 +22,7 @@ jobs:
 
       - name: Run Action B
         id: action-b
-        uses: ./.github/workflows/Action B.yml
+        uses: ./Action B.yml
         with:
           name: ${{inputs.name}}
 
