@@ -1,0 +1,34 @@
+name: Action A 
+
+on:
+  workflow_call:
+    inputs:
+      name:
+        description: 'Enter your name'
+        required: true
+        type: string
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Enter your name'
+        required: true
+
+jobs:
+  say_hello:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Run Action B
+        id: action-b
+        uses: your-username/action-b@main
+        with:
+          name: ${{inputs.name}}
+
+  say_goodbye:
+    needs: say_hello
+    runs-on: ubuntu-latest
+    steps:
+      - name: Say Goodbye
+        run: echo "Goodbye, ${{intputs.name}}"
