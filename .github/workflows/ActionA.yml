@@ -17,6 +17,9 @@ jobs:
         uses: ./.github/workflows/ActionB.yml
         with:
           name: ${{inputs.name}}
+        secrets: inherit
+
+        
   say_goodbye:
     needs: say_hello
     runs-on: ubuntu-latest
